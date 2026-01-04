@@ -138,42 +138,4 @@ def jwt_api():
 # RUN
 # =========================
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=10000))
-
-    except Exception as e:
-        return jsonify(error=True, msg=str(e))
-
-
-# =========================
-# JWT THUG (API GỐC)
-# =========================
-@app.route("/jwt")
-def jwt_api():
-    uid = request.args.get("uid")
-    password = request.args.get("password")
-
-    if not uid or not password:
-        return jsonify(error=True, msg="missing uid/password")
-
-    token = jwt.encode(
-        {
-            "uid": uid,
-            "password": password,
-            "exp": datetime.datetime.utcnow() + datetime.timedelta(days=1)
-        },
-        SECRET,
-        algorithm="HS256"
-    )
-
-    return jsonify(
-        uid=uid,
-        server="VN",
-        token=token
-    )
-
-
-# =========================
-# RUN
-# =========================
-if __name__ == "__main__":
     app.run(host="0.0.0.0", port=10000)
